@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+.next/
+out/
+dist/
+build/
+.turbo/
+
+# Env
+.env
+.env.local
+.env.*.local
+!.env.example
+.secrets.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editors / OS
+.DS_Store
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Bot runtime state (WhatsApp sessions + dedup log; must persist in volume, never git)
+apps/bot/sessions/
+apps/bot/qr.png
+
+# Testing / coverage
+coverage/
+*.lcov
+
+# Vercel
+.vercel

@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body {
+    @apply bg-canvas-0 text-ink-high antialiased;
+  }
+
+  body {
+    font-feature-settings: 'ss01' on, 'cv11' on;
+    /* Reserve space for the persistent player so page content never hides under it. */
+    padding-bottom: theme('spacing.playerBar');
+  }
+
+  ::selection {
+    background: theme('colors.accent.DEFAULT');
+    color: theme('colors.canvas.0');
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}

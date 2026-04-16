@@ -1,0 +1,27 @@
+# Example fly.toml for deploying gramola-bot on Fly.io.
+# Copy to `fly.toml` and adjust app name + primary region.
+#
+# Deploy:
+#   fly launch --no-deploy          # first time only, creates the app
+#   fly volumes create gramola_sessions --size 1 --region mad
+#   fly secrets set INGEST_SECRET=... WHATSAPP_GROUP_ID=... WEB_BASE_URL=... YOUTUBE_API_KEY=...
+#   fly deploy
+
+app = "gramola-bot"
+primary_region = "mad"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[[mounts]]
+  source = "gramola_sessions"
+  destination = "/app/sessions"
+
+[processes]
+  app = "node dist/index.js"
+
+# No HTTP service — this is a persistent socket worker.
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 512
