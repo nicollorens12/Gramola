@@ -14,7 +14,10 @@ async function main() {
   const seen = new SeenStore({ dir: e.SESSION_DIR });
   await seen.init();
 
-  const client = createWhatsAppClient({ sessionDir: e.SESSION_DIR });
+  const client = createWhatsAppClient({
+    sessionDir: e.SESSION_DIR,
+    pairingPhone: e.PAIRING_PHONE,
+  });
   const bootTimeSeconds = Math.floor(Date.now() / 1000);
 
   client.on('message', (msg) => {
