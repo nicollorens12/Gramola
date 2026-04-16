@@ -31,6 +31,15 @@ export async function handleMessage(msg: Message, config: HandlerConfig): Promis
 
   // 1. Group filter: only the configured group can create posts.
   if (msg.from !== config.groupId) {
+    // At debug level, surface the `from` of any group message we rejected —
+    // makes WHATSAPP_GROUP_ID discoverable on first-time pairing without
+    // polluting info-level logs once the right id is configured.
+    if (msg.from.endsWith('@g.us')) {
+      child.debug(
+        { from: msg.from, preview: (msg.body ?? '').slice(0, 60) },
+        'drop: wrong group',
+      );
+    }
     return;
   }
 
