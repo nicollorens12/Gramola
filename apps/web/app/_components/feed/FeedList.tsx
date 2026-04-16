@@ -23,10 +23,6 @@ export function FeedList({ initialPosts }: FeedListProps) {
     return (
       <div className="flex flex-col items-center gap-3 py-24 text-center text-ink-mid">
         <p className="font-display text-2xl text-ink-high">Quiet in here.</p>
-        <p className="max-w-sm text-sm">
-          New posts arrive from the group. Drop a <code className="font-mono text-accent">!link</code> in
-          chat and it&rsquo;ll show up here.
-        </p>
       </div>
     );
   }
