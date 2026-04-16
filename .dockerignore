@@ -1,0 +1,32 @@
+# Never ship local node_modules into the image — they're often wrong-arch
+# (ARM Mac vs AMD linux) and bloat the build context massively.
+**/node_modules
+node_modules
+
+# Secrets / env — provided at runtime via --env-file
+.env
+.env.local
+.env.*.local
+.secrets.local
+
+# Local build outputs
+**/.next
+**/.turbo
+**/dist
+**/build
+**/coverage
+
+# Tooling state
+.git
+.github
+.vercel
+**/.vercel
+.vscode
+.idea
+
+# Bot runtime state — must never ship in the image, provided by volume
+apps/bot/sessions
+apps/bot/qr.png
+
+# OS
+.DS_Store
