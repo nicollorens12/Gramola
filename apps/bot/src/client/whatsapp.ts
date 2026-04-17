@@ -55,8 +55,11 @@ export function createWhatsAppClient(opts: CreateWhatsAppClientOpts) {
       if (pairingCodeRequested) return;
       pairingCodeRequested = true;
       try {
-        // whatsapp-web.js exposes requestPairingCode on Client; the typings
-        // sometimes lag the runtime, so we cast narrowly here.
+        // WhatsApp Web's internal JS (window.Store, onCodeReceivedEvent, etc.)
+        // isn't fully loaded yet when the first QR event fires. Without a short
+        // wait, requestPairingCode fails with "not a function". 5 s is enough.
+        log.info('Waiting for WhatsApp Web internals to load before requesting pairing code...');
+        await new Promise((r) => setTimeout(r, 5000));
         const code = await (client as unknown as {
           requestPairingCode: (phone: string) => Promise<string>;
         }).requestPairingCode(opts.pairingPhone);
