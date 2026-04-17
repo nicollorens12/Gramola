@@ -19,6 +19,11 @@ const serverSchema = z.object({
   SITE_URL: z.string().url().default('http://localhost:3000'),
   RATE_LIMIT_UPSTASH_URL: z.string().url().optional(),
   RATE_LIMIT_UPSTASH_TOKEN: z.string().optional(),
+  // WhatsApp Cloud API (Meta webhook approach).
+  WHATSAPP_VERIFY_TOKEN: z.string().min(1).optional(),
+  WHATSAPP_APP_SECRET: z.string().optional(),
+  WHATSAPP_GROUP_ID: z.string().optional(),
+  YOUTUBE_API_KEY: z.string().optional(),
 });
 
 const clientSchema = z.object({
@@ -50,6 +55,10 @@ export function serverEnv() {
     SITE_URL: process.env.SITE_URL,
     RATE_LIMIT_UPSTASH_URL: process.env.RATE_LIMIT_UPSTASH_URL,
     RATE_LIMIT_UPSTASH_TOKEN: process.env.RATE_LIMIT_UPSTASH_TOKEN,
+    WHATSAPP_VERIFY_TOKEN: process.env.WHATSAPP_VERIFY_TOKEN,
+    WHATSAPP_APP_SECRET: process.env.WHATSAPP_APP_SECRET,
+    WHATSAPP_GROUP_ID: process.env.WHATSAPP_GROUP_ID,
+    YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY,
   });
   return _serverEnv;
 }
